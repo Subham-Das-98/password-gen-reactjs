@@ -92,12 +92,12 @@ function App() {
     // check if the generated password fulfills the user requirement
     if (!validatePassword(currentPassword)) {
       generatePassword();
+    } else {
+      // set password strength and password when user requirement fulfills
+      let strength = evaluatePasswordStrength(currentPassword);
+      setPasswordStrength(strength);
+      setPassword(currentPassword);
     }
-
-    // set password strength and password when user requirement fulfills
-    let strength = evaluatePasswordStrength(currentPassword);
-    setPasswordStrength(strength);
-    setPassword(currentPassword);
   }, [
     passwordLength,
     includeNumbers,
@@ -192,8 +192,8 @@ function App() {
               strength
             </div>
             <div className="flex gap-1.5">
-              <IndicatorBar 
-                bgColor={passwordStrength >= 1 ? "bg-emerald-400" : ""} 
+              <IndicatorBar
+                bgColor={passwordStrength >= 1 ? "bg-emerald-400" : ""}
               />
               <IndicatorBar
                 bgColor={passwordStrength >= 2 ? "bg-emerald-400" : ""}
